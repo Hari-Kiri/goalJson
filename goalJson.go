@@ -1,11 +1,4 @@
-/*
- * Go simple JSON library module.
- * Created: 21/06/2022
- * Write by:
- * - Hari Yulianto Pratama
- */
-
-package json
+package goalJson
 
 import (
 	"encoding/json"
