@@ -1,3 +1,3 @@
-module github.com/Hari-Kiri/goal-json
+module github.com/Hari-Kiri/goalJson
 
 go 1.18
