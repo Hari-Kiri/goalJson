@@ -1,6 +1,7 @@
 package goalJson
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -14,11 +15,14 @@ func JsonEncode(content map[string]interface{}, indent bool) (string, error) {
 		}
 		return string(result), nil
 	}
-	result, error := json.Marshal(content)
-	if error != nil {
-		return "", fmt.Errorf("JSON Encode failed => %q", error)
+	buffer := new(bytes.Buffer)
+	encoder := json.NewEncoder(buffer)
+	encoder.SetEscapeHTML(false)
+	errorEncodingNoIndent := encoder.Encode(content)
+	if errorEncodingNoIndent != nil {
+		return "", fmt.Errorf("JSON Encode failed => %q", errorEncodingNoIndent)
 	}
-	return string(result), nil
+	return buffer.String(), nil
 }
 
 // Decode json data
@@ -30,4 +34,3 @@ func JsonDecode(content string) (map[string]interface{}, error) {
 	}
 	return result, nil
 }
-
